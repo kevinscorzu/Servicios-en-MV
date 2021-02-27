@@ -1,0 +1,56 @@
+html,
+body,
+.App,
+#root {
+  height: 100%;
+}
+
+p,
+h1,
+h2 {
+  margin: 0;
+}
+
+.BgImg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+.Container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 720px;
+  min-height: 500px;
+  margin: 64px auto;
+}
+
+.Row {
+  display: flex;
+  gap: 16px;
+}
+
+.Title {
+  margin-bottom: 48px;
+}
+
+.Button {
+  width: 100%;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: green;
+  box-shadow: 2px 4px 4px #ccc;
+  border: 0;
+}
+.Button:hover {
+  background-color: purple;
+}
