@@ -5,7 +5,6 @@
 #include <jansson.h>
 
 void setPort(int newPort);
-void *threadTest(void *ptr);
 int applyHistogram (const struct _u_request * request, struct _u_response * response, void * user_data);
 int applyClassification (const struct _u_request * request, struct _u_response * response, void * user_data);
 int startServer();

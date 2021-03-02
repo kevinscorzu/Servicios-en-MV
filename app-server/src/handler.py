@@ -1,10 +1,24 @@
 import sys
 import json
+import histogram
 
 dirC = None
 dirH = None
 dirL = None
 jsonData = None
+
+def readJson():
+    global jsonData
+
+    with open("images.json") as f:
+        jsonData = json.load(f)
+        f.close()
+    print(jsonData["client"])
+    if not (jsonData["images"]):
+        print("Error, there are no images to handle")
+        sys.exit()
+
+    return
 
 def setFilePaths(readData):
     global dirC
@@ -29,25 +43,17 @@ def readConfigFile():
 
     return setFilePaths(readData)
 
-def readJson():
-    global jsonData
-
-    with open("images.json") as f:
-        jsonData = json.load(f)
-        f.close()
-    print(jsonData["client"])
-    if not (jsonData["images"]):
-        print("Error, there are no images to handle")
-        sys.exit()
-
-    return
-
 def main():
-    print('Number of arguments:', len(sys.argv), 'arguments.')
-    print('Argument List:', str(sys.argv))
     readJson()
     readConfigFile()
-    sys.exit()
+
+    if str(sys.argv[1]) == "0":
+        histogram.applyHistogram(jsonData["images"], dirH)
+        return
+    else:
+        print("ES 1")
+        return
 
 if __name__ == "__main__":
     main()
+    sys.exit()

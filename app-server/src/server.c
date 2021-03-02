@@ -51,7 +51,6 @@ int applyClassification (const struct _u_request * request, struct _u_response *
 int startServer() {
     struct _u_instance instance;
 
-    // Initialize instance with the port number
     if (ulfius_init_instance(&instance, port, NULL, NULL) != U_OK) {
         fprintf(stderr, "Error ulfius_init_instance, abort\n");
         return(1);
@@ -60,11 +59,9 @@ int startServer() {
     ulfius_add_endpoint_by_val(&instance, "POST", "/ImageServer/Histogram", NULL, 0, &applyHistogram, NULL);
     ulfius_add_endpoint_by_val(&instance, "POST", "/ImageServer/ColorClassification", NULL, 0, &applyClassification, NULL);
 
-    // Start the framework
     if (ulfius_start_framework(&instance) == U_OK) {
         printf("Start framework on port %d\n", instance.port);
 
-        // Wait for the user to press <enter> on the console to quit the application
         getchar();
     } else {
         fprintf(stderr, "Error starting framework\n");
