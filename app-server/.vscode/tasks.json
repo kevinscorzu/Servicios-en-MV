@@ -6,7 +6,8 @@
             "command": "/usr/bin/gcc",
             "args": [
                 "-g",
-                "${file}",
+                "${workspaceFolder}/src/main.c",
+                "${workspaceFolder}/src/server.c",
                 "-o",
                 "${workspaceFolder}/out/${fileBasenameNoExtension}",
                 "-lulfius",
