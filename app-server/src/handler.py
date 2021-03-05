@@ -20,11 +20,7 @@ rClassNum = None
 client = None
 genError = None
 op = None
-root = None
-
-# Función encargada de obtener el path donde se encuentra el root del proyecto
-def projectRoot() -> Path:
-    return Path(__file__).parent.parent
+root = "/home/skryfall/Projects/Servicios-en-MV/app-server"
 
 # Función auxiliar secundaria de createString()
 def createStringAux2(message, status):
@@ -255,14 +251,12 @@ def createDirs():
 def main():
     global genError
     global op
-    global root
 
-    root = str(projectRoot())
     readConfigFile()
     readImages()
     readData()
     createDirs()
-    #cleanFiles()
+    cleanFiles()
 
     op = sys.argv[1]
 
