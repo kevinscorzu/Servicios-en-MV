@@ -47,10 +47,19 @@ h2 {
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  background-color: green;
-  box-shadow: 2px 4px 4px #ccc;
+  background-color: #37ff8b;
   border: 0;
 }
 .Button:hover {
-  background-color: purple;
+  opacity: 0.9;
+}
+
+.BtnContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.Input {
+  font-size: 20px;
+  margin: 8px;
 }
