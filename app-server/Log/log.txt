@@ -1,1 +1,1 @@
-Client: Kevin, Files: histogram0.png, histogram1.png, Status: Histogram Completed Successfuly, Datetime: 2021-03-04 17:59:13.844712
+Client: Kevin, Files: classification0.png, classification1.png, Status: Classification Completed Successfuly, Datetime: 2021-03-05 12:14:53.563086

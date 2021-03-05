@@ -22,24 +22,28 @@ genError = None
 op = None
 root = None
 
+# Función encargada de obtener el path donde se encuentra el root del proyecto
 def projectRoot() -> Path:
     return Path(__file__).parent.parent
 
+# Función auxiliar secundaria de createString()
 def createStringAux2(message, status):
     message += "Status: " + status + ", "
     message += "Datetime: " + str(datetime.now()) + "\n"
 
     return message
 
+# Función auxiliar de createString()
 def createStringAux(message):
-        if genError is not None:
-            return createStringAux2(message, genError)
+    if genError is not None:
+        return createStringAux2(message, genError)
+    else:
+        if str(op) == "0":
+            return createStringAux2(message, "Histogram Completed Successfuly")
         else:
-            if str(op) == "0":
-                return createStringAux2(message, "Histogram Completed Successfuly")
-            else:
-                return createStringAux2(message, "Classification Completed Successfuly")
+            return createStringAux2(message, "Classification Completed Successfuly")
 
+# Función encargada de crear el mensaje que será escrito en el log
 def createString():
     global rHistNum
     global rClassNum
@@ -69,6 +73,7 @@ def createString():
         message += "Files: " + files
         return createStringAux(message)
 
+# Función encargada de escribir en el log
 def writeLog():
     message = createString()
 
@@ -83,6 +88,7 @@ def writeLog():
             f.close()
         return
 
+# Función encargada de leer las imágenes enviadas por el cliente
 def readImages():
     global images
     global client
@@ -108,6 +114,7 @@ def readImages():
         writeLog()
         sys.exit()
 
+# Función encargada de establecer las rutas donde se almacenarán las imágenes y el log
 def setFilePaths(readData):
     global dirC
     global dirH
@@ -124,6 +131,7 @@ def setFilePaths(readData):
         print(genError)
         sys.exit()
 
+# Función encargada de leer el archivo de configuración del servidor
 def readConfigFile():
     global genError
 
@@ -143,6 +151,7 @@ def readConfigFile():
         print(genError)
         sys.exit()
 
+# Función encargada de leer el json que lleva cuenta de cuántas imágenes se han tratado
 def readData():
     global histNum
     global classNum
@@ -171,6 +180,7 @@ def readData():
             f.close()
         return
 
+# Función auxiliar de updateData()
 def updateDataAux():
     data = {}
     data["histNum"] = histNum
@@ -180,6 +190,7 @@ def updateDataAux():
         f.close()
     return
 
+# Función encargada de actualizar el json que lleva cuenta de cuántas imágenes se han tratado
 def updateData():
     global histNum
     global classNum
@@ -193,6 +204,7 @@ def updateData():
         classNum += quantImages
         return updateDataAux()
 
+# Función encargada de verificar si el proceso fue realizado con éxito
 def checkStatus(status):
     if status == 1:
         updateData()
@@ -202,10 +214,13 @@ def checkStatus(status):
         writeLog()
         sys.exit()
 
+# Función encargada de eliminar el json con las imágenes
 def cleanFiles():
     os.remove(root + "/images.json")
     return
 
+# Función encargada de desencriptar las imágenes en base64
+# Además también se encarga de reordenar las imágenes de menor a mayor tamaño
 def decryptAndSortImages():
     imageList = {}
     imagesSizes = {}
@@ -224,15 +239,19 @@ def decryptAndSortImages():
 
     return imageList, imagesSizes
 
+# Función encargada de crear los directorios para la clasificación de imágenes
+# Si ya están creados, se ignora
 def createDirs():
     try:
         os.mkdir(root + dirC + "/Rojo")
         os.mkdir(root + dirC + "/Verde")
         os.mkdir(root + dirC + "/Azul")
+        os.mkdir(root + dirC + "/Desconocido")
         return
     except:
         return
 
+# Función principal del Script de manejo de imágenes
 def main():
     global genError
     global op
