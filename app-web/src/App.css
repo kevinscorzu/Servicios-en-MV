@@ -1,0 +1,65 @@
+html,
+body,
+.App,
+#root {
+  height: 100%;
+}
+
+p,
+h1,
+h2 {
+  margin: 0;
+}
+
+.BgImg {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  min-width: 100%;
+  z-index: -1;
+}
+
+.Container {
+  background-color: #ccc;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 720px;
+  min-height: 500px;
+  margin: 64px auto;
+}
+
+.Row {
+  display: flex;
+  gap: 16px;
+}
+
+.Title {
+  margin-bottom: 48px;
+}
+
+.Button {
+  width: 100%;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #37ff8b;
+  border: 0;
+}
+.Button:hover {
+  opacity: 0.9;
+}
+
+.BtnContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.Input {
+  font-size: 20px;
+  margin: 8px;
+}
