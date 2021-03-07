@@ -7,7 +7,6 @@ import bg from "./assets/bg-img.jpg";
 
 function App() {
   const [server, setServer] = useState("");
-  const [port, setPort] = useState("");
   const [client, setClient] = useState("");
   const [images, setImages] = useState([]);
 
@@ -24,15 +23,37 @@ function App() {
     });
   };
 
-  const send = async (event) => {
+  const histogram = async (event) => {
     event.preventDefault();
     const imageArray = [];
     for (let img of images) {
       const image64 = await convertBase64(img);
-      imageArray.push(image64.substring(23));
+      imageArray.push(image64.split(",")[1]);
     }
     console.log({ client, images: imageArray });
-    //axios.post(`${server}:${port}/hist`, { client, images });
+    axios.post(server + `ImageServer/Histogram`, {
+      client,
+      images: imageArray,
+    });
+  };
+
+  const color = async (event) => {
+    event.preventDefault();
+    const imageArray = [];
+    for (let img of images) {
+      const image64 = await convertBase64(img);
+      imageArray.push(image64.split(",")[1]);
+    }
+    console.log({ client, images: imageArray });
+    axios.post(server + `ImageServer/ColorClassification`, {
+      client,
+      images: imageArray,
+    });
+  };
+
+  const reset = async (event) => {
+    event.preventDefault();
+    axios.get(server + `ImageServer/Reset`);
   };
 
   return (
@@ -47,13 +68,6 @@ function App() {
             onChange={(e) => setServer(e.target.value)}
             type="text"
             placeholder="Server Ip"
-          ></input>
-          <input
-            className="Input"
-            value={port}
-            onChange={(e) => setPort(e.target.value)}
-            type="text"
-            placeholder="Puerto"
           ></input>
           <input
             className="Input"
@@ -72,11 +86,14 @@ function App() {
             maxFileSize={5242880}
           />
           <div className="BtnContainer">
-            <button className="Button" onClick={send}>
+            <button className="Button" onClick={histogram}>
               Histograma
             </button>
-            <button className="Button" onClick={send}>
+            <button className="Button" onClick={color}>
               Colores
+            </button>
+            <button className="Button" onClick={reset}>
+              RESET
             </button>
           </div>
         </form>
