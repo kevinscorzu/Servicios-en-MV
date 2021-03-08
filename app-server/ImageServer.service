@@ -1,0 +1,14 @@
+[Unit]
+Description=ImageServer service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=skryfall
+ExecStart=/home/skryfall/Projects/Servicios-en-MV/app-server/out/main
+
+[Install]
+WantedBy=multi-user.target
