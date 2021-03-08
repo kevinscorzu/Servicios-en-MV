@@ -9,6 +9,8 @@ Tarea 1 - Introducción a los Sistemas Operativos
 -npm start
 
 ## app-server Usage
+-sudo apt install libulfius-dev uwsc
+
 -cd app-server
 
 -make
