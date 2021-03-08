@@ -3,11 +3,14 @@ Tarea 1 - Introducción a los Sistemas Operativos
 
 ## app-web Usage
 -cd app-web
+
 -npm install
+
 -npm start
 
 ## app-server Usage
 -cd app-server
+
 -make
 
 
