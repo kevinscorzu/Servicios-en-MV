@@ -59,7 +59,7 @@ def applyClassificationAux(image, number, direc):
     global bCount
 
     try:
-        image.convert('RGB')
+        image = image.convert('RGB')
         width, height = image.size
         i = 0
         j = 0

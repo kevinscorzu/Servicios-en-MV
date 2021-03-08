@@ -136,6 +136,17 @@ int resetCounter (const struct _u_request * request, struct _u_response * respon
 }
 
 /**
+ * Función encargada de permitir CORS en el REST API
+ */
+int allowCORS (const struct _u_request * request, struct _u_response * response, void * user_data) {
+    u_map_put(response->map_header, "Access-Control-Allow-Origin", "*");
+    u_map_put(response->map_header, "Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    u_map_put(response->map_header, "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Bearer, Authorization");
+    u_map_put(response->map_header, "Access-Control-Max-Age", "1800");
+    return U_CALLBACK_COMPLETE;
+}
+
+/**
  * Función encargada de iniciar el servidor
  */
 int startServer() {
@@ -146,6 +157,7 @@ int startServer() {
         return(1);
     }
 
+    ulfius_add_endpoint_by_val(&instance, "OPTIONS", NULL, "*", 0, &allowCORS, NULL);
     ulfius_add_endpoint_by_val(&instance, "POST", "/ImageServer/Histogram", NULL, 0, &applyHistogram, NULL);
     ulfius_add_endpoint_by_val(&instance, "POST", "/ImageServer/ColorClassification", NULL, 0, &applyClassification, NULL);
     ulfius_add_endpoint_by_val(&instance, "GET", "/ImageServer/Reset", NULL, 0, &resetCounter, NULL);
@@ -158,7 +170,9 @@ int startServer() {
         sprintf(strPort, "%d", port);
         writeToLog(strPort);
         addDateTimeToLog();
-        getchar();
+        while (1) {
+            
+        }
     } else {
         fprintf(stderr, "Error starting framework\n");
 
