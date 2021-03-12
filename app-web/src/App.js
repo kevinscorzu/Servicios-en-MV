@@ -5,11 +5,25 @@ import ImageUploader from "react-images-upload";
 import "./App.css";
 import bg from "./assets/bg-img.jpg";
 
+/**
+ *
+ * @Author Juan Pablo Alavarado
+ * Esta función contiene la lógica de la aplicación incluyendo
+ * todas las funciones relacionadas a los request y conversión a base64.,
+ * Esta función también describe los componentes gráficos de la página
+ */
+
 function App() {
   const [server, setServer] = useState("");
   const [client, setClient] = useState("");
   const [images, setImages] = useState([]);
 
+  /**
+   *
+   * @Author Juan Pablo Alavarado
+   * Esta función Se encarga de convertir una amgen con Formato "File" a
+   * una string en base64 de modo asincrónico
+   */
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -23,6 +37,12 @@ function App() {
     });
   };
 
+  /**
+   *
+   * @Author Juan Pablo Alavarado
+   * Esta función se encarga de enviar el array de imágnes a la ruta
+   * del servidor degisinado para procesamiento del tipo histograma
+   */
   const histogram = async (event) => {
     event.preventDefault();
     const imageArray = [];
@@ -37,6 +57,12 @@ function App() {
     });
   };
 
+  /**
+   *
+   * @Author Juan Pablo Alavarado
+   * Esta función se encarga de enviar el array de imágnes a la ruta
+   * del servidor degisinado para procesamiento del clasficación de colores
+   */
   const color = async (event) => {
     event.preventDefault();
     const imageArray = [];
@@ -51,6 +77,12 @@ function App() {
     });
   };
 
+  /**
+   *
+   * @Author Juan Pablo Alavarado
+   * Esta función se encarga de enviar una señal al servidor para resetear
+   * su contador de imágenes interno
+   */
   const reset = async (event) => {
     event.preventDefault();
     axios.get(server + `ImageServer/Reset`);
